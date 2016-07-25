@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="car">
+<head>
+	<meta charset="UTF-8">
+	<title>购物车</title>
+	<link rel="stylesheet" href="css/shop-car.css">
+	<script src="js/jquery.js"></script>
+	<script src="js/angular.min.js"></script>
+	<script src="js/shop-car.js"></script>
+</head>
+<body>
+<div class="out" ng-controller="shop">
+<!-- 商品列表开始 -->
+	<div class="shop-top">
+		<!-- <div class="shop-top-box">
+			<span>甜点</span>
+		</div> -->
+	</div>
+	<div class="shop clearfix">
+		<div class="shop-list" ng-repeat="v in goods">
+			<div class="shop-img">
+				<img src="{{v.url}}" alt="" class="list-img">
+			</div>
+			<div class="shop-info">
+				<div class="title">{{v.name}}</div>
+				<div class="price">{{v.price|currency:'￥'}}</div>
+				<button class="shop-btn" ng-click="buyBtn($index)">加入购物车</button>
+			</div>
+		</div>
+	</div>
+<!-- 商品列表结束 -->
+<!-- 购物车开始 -->
+<div class="shop-car">
+	
+	<table>
+		<tr>
+			<th>编号</th>
+			<th>商品名称</th>
+			<th ng-click="order('price')">价格(排序)</th>
+			<th ng-click="order('num*price')">总价(排序)</th>
+			<th>数量</th>
+			<th>操作</th>
+		</tr>
+		<tr ng-repeat="v in buy | orderBy:n:or">
+			<td>{{$index+1}}</td>
+			<td>
+				<div class="shop-img1">
+					<img src="{{v.url}}" alt="">
+				</div>
+				<span>{{v.name}}</span>
+			</td>
+			<td class="price">{{v.price|currency:"￥"}}</td>
+			<td>{{v.num*v.price|currency:"￥"}}</td>
+			<td>
+				<button ng-click="add(v.name)">+</button>
+				<input type="text" ng-model="v.num">
+				<button ng-click="jian(v.name)">-</button>
+			</td>
+			<td>
+				<button class="del-btn" ng-click="del(v.name)">删除</button>
+			</td>
+		</tr>
+		<tr class="shop-sum">
+			<td>总价</td>
+			<td colspan="5">{{sum()|currency:"￥"}}</td>
+		</tr>
+	</table>
+</div>
+<!-- 购物车结束 -->
+</div>
+</body>
+</html>
