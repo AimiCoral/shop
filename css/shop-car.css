@@ -73,7 +73,7 @@ body{
 .shop-img{
 	width:192px;
 	height:140px;
-	background: red;
+	background:#fff;
 	margin:0 auto;
 	margin-top:16px;
 	transform:all .5s;
